@@ -48,3 +48,9 @@ html
           $('#chatLog').append(msg+'\n');
           $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
         });
+
+        // 접속했을 때 알림
+        socket.on('conn', function(msg) {
+          $('#chatLog').append(msg+'\n');
+          $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
+        });
