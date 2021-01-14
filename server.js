@@ -22,17 +22,19 @@ io.on('connection', function(socket) {
   io.to(socket.id).emit('create name', name); // 해당 소켓에만 이벤트 발생
 
   // 알림 메세지
-  io.emit('connect inform', '<알림> ' + name + '님이 채팅창에 접속했습니다.');
+  io.emit('connect inform', name);
 
   // 채팅방 접속이 끊어졌을 때 - 2
   socket.on('disconnect', function() {
     console.log('user disconnected: ' + socket.id + ' ' + socket.name);
-    io.emit('disconnect inform', '<알림> ' + socket.name + '님이 채팅창을 떠났습니다.');
+    io.emit('disconnect inform', socket.name);
   });
 
   // 메세지를 보냈을 때 - 3
   socket.on('send message', function(name, text) {
     var msg = name + ' : ' + text;
+    if(name != socket.name) // 닉네임을 바꿨을 때
+      io.emit('change name', socket.name, name);
     socket.name = name;
     console.log(msg);
     io.emit('receive message', msg);

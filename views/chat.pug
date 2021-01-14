@@ -43,6 +43,11 @@ html
           $('#name').val(name);
         });
 
+        //닉네임을 바꿨을 때
+        socket.on('change name', function(oldname, name) {
+          $('#chatLog').append('<알림>' + oldname + '님이 ' + name + '님으로 닉네임을 변경했습니다.\n');
+        });
+
         // 메세지를 받았을 때 - 3
         socket.on('receive message', function(msg) {
           $('#chatLog').append(msg+'\n');
@@ -50,13 +55,13 @@ html
         });
 
         // 접속했을 때 알림
-        socket.on('connect inform', function(msg) {
-          $('#chatLog').append(msg+'\n');
+        socket.on('connect inform', function(name) {
+          $('#chatLog').append('<알림> ' + name + '님이 채팅창에 접속했습니다.'+'\n');
           $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
         });
 
         // 접속 끊었을 때 알림
-        socket.on('disconnect inform', function(msg) {
-          $('#chatLog').append(msg+'\n');
+        socket.on('disconnect inform', function(name) {
+          $('#chatLog').append('<알림> ' + name + '님이 채팅창을 떠났습니다.'+'\n');
           $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
         });
