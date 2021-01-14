@@ -50,7 +50,13 @@ html
         });
 
         // 접속했을 때 알림
-        socket.on('conn', function(msg) {
+        socket.on('connect inform', function(msg) {
+          $('#chatLog').append(msg+'\n');
+          $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
+        });
+
+        // 접속 끊었을 때 알림
+        socket.on('disconnect inform', function(msg) {
           $('#chatLog').append(msg+'\n');
           $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
         });

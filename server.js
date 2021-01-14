@@ -22,11 +22,12 @@ io.on('connection', function(socket) {
   io.to(socket.id).emit('create name', name); // 해당 소켓에만 이벤트 발생
 
   // 알림 메세지
-  io.emit('conn', '<알림> ' + name + '님이 채팅창에 접속했습니다.')
+  io.emit('connect inform', '<알림> ' + name + '님이 채팅창에 접속했습니다.');
 
   // 채팅방 접속이 끊어졌을 때 - 2
   socket.on('disconnect', function() {
     console.log('user disconnected: ' + socket.id + ' ' + socket.name);
+    io.emit('disconnect inform', '<알림> ' + socket.name + '님이 채팅창을 떠났습니다.');
   });
 
   // 메세지를 보냈을 때 - 3
@@ -36,6 +37,7 @@ io.on('connection', function(socket) {
     console.log(msg);
     io.emit('receive message', msg);
   });
+
 });
 
 http.listen(3000, function() {
