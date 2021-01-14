@@ -1,8 +1,17 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+#chatLog{
+  width: 50%;
+  height: 500px;
+}
+#name{
+  width: 10%;
 }
 
-a {
-  color: #00B7FF;
+#message{
+  width: 35%;
+}
+
+.btn.btn-info{
+  width: 50%;
+  height: 45px;
+  font-size: 20px;
 }
